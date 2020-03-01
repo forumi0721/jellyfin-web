@@ -1070,6 +1070,15 @@ define(["playbackManager", "dom", "inputmanager", "datetime", "itemHelper", "med
             }
         }
 
+        function setPlaybackSpeed() {
+            if (document.querySelector('video').playbackRate >= 2) {
+                document.querySelector('video').playbackRate = 0.5;
+            } else {
+                document.querySelector('video').playbackRate = document.querySelector('video').playbackRate + 0.25;
+            }
+            view.querySelector(".btnSetPlaybackSpeed").textContent = document.querySelector('video').playbackRate + "x";
+        }
+
         function onWindowKeyDown(e) {
             if (!currentVisibleMenu && 32 === e.keyCode) {
                 playbackManager.playPause(currentPlayer);
@@ -1444,6 +1453,7 @@ define(["playbackManager", "dom", "inputmanager", "datetime", "itemHelper", "med
         });
         view.querySelector(".btnAudio").addEventListener("click", showAudioTrackSelection);
         view.querySelector(".btnSubtitles").addEventListener("click", showSubtitleTrackSelection);
+        view.querySelector(".btnSetPlaybackSpeed").addEventListener("click", setPlaybackSpeed);
 
         if (browser.touch) {
             (function () {
